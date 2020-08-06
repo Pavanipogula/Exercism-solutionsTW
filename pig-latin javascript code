@@ -1,0 +1,33 @@
+export class translator {
+  static translate(str) {
+    var arr = str.split(' ');
+    var newstr='';
+    for (var i=0;i<arr.length;i++){
+      arr[i] = this.translateWord(arr[i]);
+    }
+    for(var i=0;i<arr.length;i++){
+      newstr+=arr[i]+' ';
+    }
+    return newstr.slice(0,newstr.length-1);
+    }
+
+    static translateWord(str){
+      var vowels =['a','e','i','o','u','xr','yt'];
+      var vBetween=['a','e','i','o','u','y'];
+      //var new = str;
+      if(vowels.includes(str[0]) || vowels.includes(str.slice(0,2))){
+        var newst= str+'ay';
+      } else{
+        var con=0;
+        while(con<str.length && !vBetween.includes(str[con])){
+          con++;
+        }
+        if(con<str.length && str.slice(con-1,con+1)=='qu'){
+          con++;
+        }
+        if(con==0) con++;
+        newst=str.slice(con)+str.slice(0,con)+"ay";
+      }
+    return newst;
+    }
+  }
